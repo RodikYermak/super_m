@@ -52,5 +52,5 @@ function getUser() {
 }
 const result = getUser();
 const [id, sayHello] = result;
-
+dfdfds
 */
