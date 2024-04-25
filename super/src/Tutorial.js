@@ -37,4 +37,20 @@ function Navbar(props) {
     const {children, ...rest} = props;
     return <h1 {...rest}>{children}</h1>;
 }
+
+const point = [3.3124, 14.52028, 10]; //coordinates
+
+const [lat, lng, elevation] = point;
+
+function sayHello() {
+    return "Welcome!";
+}
+
+function getUser() {
+    //return the id and a function that welcomes the user
+    return [15, sayHello];
+}
+const result = getUser();
+const [id, sayHello] = result;
+
 */
