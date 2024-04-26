@@ -1,5 +1,6 @@
+import Product from './Product.js';
+
 export default function StoreFront() {
-    // hardcoded products for this project
     const products = [
         {
             name: 'Cheese',
@@ -12,5 +13,10 @@ export default function StoreFront() {
             image: 'https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto,w_300/v1580649400/react-tutorial/products/milk.png',
         },
     ];
-    return <div className="store-front">{/* render the two Products here */}</div>;
+    return (
+        <div className="store-front">
+            <Product details={products[0]} />
+            <Product details={products[1]} />
+        </div>
+    );
 }
