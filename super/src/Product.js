@@ -16,7 +16,7 @@ export default function Product(props) {
 
     return (
         <div className="product">
-            <img src={details.image} width="50" alt="" />
+            <img src={details.image} width="50" alt={details.name} />
             <div className="product-info">
                 <h2>{details.name}</h2>
                 <p>{details.description}</p>
@@ -28,7 +28,7 @@ export default function Product(props) {
                     onClick={handleDecrementClick}>
                     -
                 </button>
-                <h3 className="product-count">{count ? count : ''}</h3>
+                <h3 className="product-count">{count ? count : 0}</h3>
                 <button className="product-add" onClick={handleIncrementClick}>
                     +
                 </button>
