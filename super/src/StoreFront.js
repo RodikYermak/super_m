@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductsList from './ProductsList.js';
 import AddProductForm from './AddProductForm.js';
+import Loader from "./Loader.js";
 
 export default function StoreFront() {
     // NOTE: If you enter incorrect data into your localStorage, uncomment this line (once) then comment it out again
@@ -17,6 +18,24 @@ export default function StoreFront() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [validation, setValidation] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(()=>{
+        (async ()=>{
+            try{
+                setIsLoading(true);
+
+                const response = await fetch("https://react-tutorial-demo.firebaseio.com/products.json");
+                const data = await response.json();
+                // console.log(data)
+                setProducts(data);
+            }catch(e){
+                console.error(e);
+            }finally {
+                setIsLoading(false);
+            }
+        })()
+    }, [])
 
     useEffect(() => {
         if (products.length === 0) {
@@ -66,6 +85,10 @@ export default function StoreFront() {
 
     function handleDeleteClick(id) {
         setProducts(products.filter((product) => product.id !== id));
+    }
+
+    if(isLoading){
+        return <Loader />
     }
 
     return (
