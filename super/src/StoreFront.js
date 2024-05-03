@@ -1,12 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProductsList from './ProductsList.js';
 import AddProductForm from './AddProductForm.js';
 
 export default function StoreFront() {
-    const [products, setProducts] = useState([]);
+    // NOTE: If you enter incorrect data into your localStorage, uncomment this line (once) then comment it out again
+    // localStorage.setItem("products", "[]");
+
+    const [products, setProducts] = useState(() => {
+        const savedProducts = localStorage.getItem('products');
+        if (savedProducts) {
+            return JSON.parse(savedProducts);
+        } else {
+            return [];
+        }
+    });
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [validation, setValidation] = useState('');
+
+    useEffect(() => {
+        if (products.length === 0) {
+            document.title = 'No products';
+        } else if (products.length === 1) {
+            document.title = '1 product';
+        } else {
+            document.title = `${products.length} products`;
+        }
+    }, [products]);
+
+    useEffect(() => {
+        localStorage.setItem('products', JSON.stringify(products));
+    }, [products]);
 
     function handleFormSubmit(event) {
         event.preventDefault();
