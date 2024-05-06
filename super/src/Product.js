@@ -14,13 +14,9 @@ export default function Product(props) {
         }
     }
 
-    if (!details) {
-        return null;
-    }
-
     return (
         <div className="product">
-            <img width="50" alt={details.name} src={details.image} />
+            <img src={details.image} width="50" alt={details.name} />
             <div className="product-info">
                 <h2>{details.name}</h2>
                 <p>{details.description}</p>
