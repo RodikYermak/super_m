@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import StoreFront from './StoreFront';
+import React from 'react';
+import Navbar from './Navbar.js';
+import Home from './Home.js';
+import About from './About.js';
+import Products from './Products.js';
+import Cart from './Cart.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App() {
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    if (loggedIn) {
-        return (
-            <>
-                <StoreFront />
-                <button className="btn btn-outline" onClick={() => setLoggedIn(false)}>
-                    Logout
-                </button>
-            </>
-        );
-    } else {
-        return (
-            <>
-                <h2>Please login</h2>
-                <button className="btn btn-primary" onClick={() => setLoggedIn(true)}>
-                    Login
-                </button>
-            </>
-        );
-    }
-}
+const App = () => {
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <div className="container">
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/about" element={<About />}></Route>
+                    <Route path="/products" element={<Products />}></Route>
+                    <Route path="/cart" element={<Cart />}></Route>
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
+};
 
 export default App;
