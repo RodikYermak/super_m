@@ -1,33 +1,62 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink, Routes, Route, useParams, Outlet } from 'react-router-dom';
 import useFetch from './useFetch.js';
 
-export default function ProductDetails() {
-    const params = useParams();
+export default function ProductDetails(props) {
     const [product, setProduct] = useState({});
     const { get } = useFetch('https://react-tutorial-demo.firebaseio.com/');
-
-    const id = params.id;
+    const params = useParams();
 
     useEffect(() => {
-        get(`productdetails/id${id}.json`)
+        get(`productinfo/id${params.id}.json`)
             .then((data) => {
                 setProduct(data);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log('Could not load product details', error));
     }, []);
 
     return (
-        <div>
-            <Link to="/">Back home</Link>
-            {product && (
-                <div>
-                    <h2>{product.name}</h2>
-                    <p>{product.description}</p>
-                    <h3>${product.price}</h3>
-                    <img src={product.image} width="100" />
+        <div className="product-details-layout">
+            <div>
+                <h2>{product.name}</h2>
+                <img
+                    src={product.image}
+                    width="125"
+                    height="125"
+                    className="product-details-image"
+                    alt={product.name}
+                />
+            </div>
+            <div>
+                <div className="tabs">
+                    <ul>
+                        <li>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'tab-active' : '')}
+                                to=""
+                                end>
+                                Details
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'tab-active' : '')}
+                                to="nutrition">
+                                Nutrition
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'tab-active' : '')}
+                                to="storage">
+                                Storage
+                            </NavLink>
+                        </li>
+                    </ul>
                 </div>
-            )}
+
+                <Outlet context={product} />
+            </div>
         </div>
     );
 }

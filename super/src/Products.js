@@ -22,7 +22,7 @@ export default function Products(props) {
             <div className="products-grid">
                 {loading && <Loader />}
                 {products.map((product) => {
-                    return <Product key={product.id} details={product} />;
+                    return <Product key={product.id} details={product}></Product>;
                 })}
             </div>
         </div>
