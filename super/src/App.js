@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import Home from './Home.js';
@@ -13,14 +13,6 @@ import Cart from './Cart.js';
 
 function App() {
     const [cart, setCart] = useState([]);
-    /* !! DO NOT REMOVE !!*/
-    window.__testsCart = cart; // used for the tests in this project
-
-    useEffect(() => {
-        // to visualize the cart in the console every time in changes
-        // you can also use React dev tools
-        console.log(cart);
-    }, [cart]);
 
     function handleProductAdd(newProduct) {
         // check if item exists

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Routes, Route, useParams, Outlet } from 'react-router-dom';
+import { NavLink, useParams, Outlet } from 'react-router-dom';
 import useFetch from './useFetch.js';
 
 export default function ProductDetails(props) {
